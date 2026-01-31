@@ -54,8 +54,9 @@ const ask = q => new Promise(res => rl.question(q, res));
       name: name || filename,
       description: description || "",
       date,
-      url: `${SITE_BASE}homeworks-files/${filename}`
+      url: `homeworks-files/${filename}`
     });
+
   }
 
   rl.close();

@@ -59,12 +59,15 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
         card.addEventListener("click", () => {
-          const basePath = window.location.pathname.includes("/main/")
-            ? "/main/"
-            : "/";
+          // Get base directory of the current page
+          const baseDir = window.location.origin +
+            window.location.pathname.replace(/\/[^/]*$/, "/");
 
-          window.open(basePath + file.url.replace(/^\.?\//, ""), "_blank");
+          const cleanPath = file.url.replace(/^\.?\//, "");
+
+          window.open(baseDir + cleanPath, "_blank");
         });
+
 
 
         container.appendChild(card);
