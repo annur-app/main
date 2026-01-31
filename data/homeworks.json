@@ -1,8 +1,15 @@
 [
   {
+<<<<<<< HEAD
     "name": "Computer Science Homework",
     "date": "31.01.2026",
     "url": "../homeworks-files/homework.py",
     "description": "Sufficient and interesting solutions for given prompts"
+=======
+    "name": "homework.py",
+    "date": "31.01.2026",
+    "url": "../homeworks-files/homework.py",
+    "description": "Homework file"
+>>>>>>> 87b3ba7e904e73f80b08235ba8192848b0471f71
   }
 ]
