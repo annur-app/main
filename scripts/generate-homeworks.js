@@ -23,9 +23,10 @@ const newFiles = filesInDir.filter(f => !previous.find(p => p.url.endsWith(f)));
 
 if (newFiles.length === 0) {
   console.log("✅ No new files found.");
-  process.exit();
+} else {
+  console.log("🆕 New files detected:");
+  newFiles.forEach(f => console.log("  " + f));
 }
-
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -36,6 +37,7 @@ const rl = readline.createInterface({
 const ask = (question) => new Promise(resolve => rl.question(question, resolve));
 
 (async () => {
+  // handle new files
   for (const filename of newFiles) {
     const full = path.join(DIR, filename);
     const stats = fs.statSync(full);
@@ -50,17 +52,29 @@ const ask = (question) => new Promise(resolve => rl.question(question, resolve))
     previous.push({
       name: name || filename,
       date: dateFormatted,
-      url: `../homeworks-files/${filename}`,
+      url: `homeworks-files/${filename}`, // GitHub Pages safe path
       description: description || "Homework file"
     });
   }
 
   rl.close();
 
-  // remove entries for files that no longer exist
+// check for deleted files
+const deletedFiles = previous.filter(p => !fs.existsSync(path.join(DIR, path.basename(p.url))));
+
+if (deletedFiles.length > 0) {
+  console.log("\n⚠️ The following files are missing and will be removed from JSON:");
+  deletedFiles.forEach(p => console.log("  " + p.name));
+}
+
+// remove all deleted files from JSON
+previous = previous.filter(p => fs.existsSync(path.join(DIR, path.basename(p.url))));
+
+
+  // remove deleted files from JSON
   previous = previous.filter(p => fs.existsSync(path.join(DIR, path.basename(p.url))));
 
   // save updated JSON
   fs.writeFileSync(OUT_FILE, JSON.stringify(previous, null, 2));
-  console.log("\n✅ Homeworks list updated with new files and removed deleted ones!");
+  console.log("\n✅ Homeworks list updated!");
 })();
