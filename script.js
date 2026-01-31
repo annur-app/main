@@ -26,27 +26,27 @@ document.addEventListener("DOMContentLoaded", () => {
   ? location.pathname
   : location.pathname.replace(/\/[^/]*$/, "/");
 
-fetch(base + "data/homeworks.json")
-  .then(r => r.json())
-  .then(files => {
-    const container = document.getElementById("homeworksList");
-    container.innerHTML = "";
+  fetch(base + "data/homeworks.json")
+    .then(r => r.json())
+    .then(files => {
+      const container = document.getElementById("homeworksList");
+      container.innerHTML = "";
 
-    files.forEach(file => {
-      const a = document.createElement("a");
-      a.href = base + file.url; // 🔥 THIS LINE FIXES IT
-      a.download = "";
-      a.className = "project-item";
-      a.target = "_blank";
+      files.forEach(file => {
+        const a = document.createElement("a");
+        a.href = base + file.url; // 🔥 THIS LINE FIXES IT
+        a.download = "";
+        a.className = "project-item";
+        a.target = "_blank";
 
-      a.innerHTML = `
-        <h3>${file.name}</h3>
-        <p>Uploaded: ${file.date}</p>
-        <p>${file.description}</p>
-      `;
+        a.innerHTML = `
+          <h3>${file.name}</h3>
+          <p>Uploaded: ${file.date}</p>
+          <p>${file.description}</p>
+        `;
 
-      container.appendChild(a);
+        container.appendChild(a);
+      });
     });
-  });
 
 });
