@@ -24,3 +24,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+/* ---------- LOAD HOMEWORK FILES ---------- */
+fetch("data/homeworks.json")
+  .then(r => r.json())
+  .then(files => {
+    const container = document.getElementById("homeworks-list");
+    if (!container) return;
+
+    files.forEach(file => {
+      const a = document.createElement("a");
+      a.href = file.url;
+      a.download = "";
+      a.style.color = "inherit";
+      a.style.textDecoration = "none";
+
+      a.innerHTML = `
+        <div class="project-item">
+          <h3>${file.name}</h3>
+          <p>Uploaded: ${file.date}</p>
+          <p>Description: ${file.description}</p>
+        </div>
+      `;
+
+      container.appendChild(a);
+    });
+  });
+
