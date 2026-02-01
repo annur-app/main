@@ -3,7 +3,7 @@
 :root {
   --bg: #f3f3f3;
   --text: #0f172a;
-  --shadow: rgba(0, 0, 0, 0.167);
+  --shadow: rgba(0, 0, 0, 0.064);
   --muted: #384658;
   --card: #ffffff;
   --pressed-card: rgb(221, 228, 237);
@@ -46,6 +46,7 @@ header {
   padding: 8px 14px;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: 0 6px 24px var(--shadow);
   color: var(--text);
 }
 
@@ -119,7 +120,7 @@ main {
   width: 100%;
   max-width: 790px;
   border-radius: 16px;
-  box-shadow: 0 12px 28px var(--shadow);
+  box-shadow: 0 12px 24px var(--shadow);
   background: var(--card);
   border: 0px solid var(--border);
   transition: transform 0.25s ease, border-color 0.25s ease;
