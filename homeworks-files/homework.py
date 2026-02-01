@@ -1,39 +1,52 @@
+import sys
 import time
 import random
 import os
-if os.name == 'nt':
-    os.system('cls')
+def cooldown(range2=8,timewait=0.18):
+    time.sleep(1)
+    for _ in range(range2):
+        print("\033[F\033[K", end="", flush=True)  # \033[F moves cursor up, \033[K clears the line
+        time.sleep(timewait)
+
+    if os.name == 'nt':
+        os.system('cls')
+cooldown(range2=20,timewait=0.08)
 def printslow(text):
-    for character in text:
-        if character == " ":
-            time.sleep(random.uniform(0.02, 0.03))
-        elif character in [".", ",", "'", "😢🌹"]:
-            time.sleep(random.uniform(0.2, 0.5))
-        else: 
-            time.sleep(random.uniform(0.06, 0.12))
-        print(character, end="", flush=True)
-#VAzifa 1: Greet the user by their family name
+    for char in text:
+        print(char, end='', flush=True)
+        # Determine delay based on character type
+        if char == " ":
+            delay = random.uniform(*(0.02, 0.03))
+        elif char in ".!?,;:😢😉🌹🤗🏎️🚘✅🦾❌👍👌💥✅🌓🚘🌹💅'":
+            delay = random.uniform(*(0.3, 0.6))
+        else:
+            delay = random.uniform(0.04, 0.10)
+        time.sleep(delay)
 
-familyname = input("Familiyangizni ni kiriting janob pomidor -- ")
-printslow("Salam aleykum, janob " + familyname + " 🤗🌹")
+        if random.random() < 0.05:
+            time.sleep(random.uniform(0.1, 0.3))
+    print()
 
-time.sleep(0.3)
-print("\n" * 3)
-time.sleep(0.1)
 
-#VAzifa 2: State the users school name
+#VAzifa 1: Greet the user by their family name 
+printslow("Familiyangizni ni kiriting janob pomidor -- ")
+familyname = input("")
+time.sleep(0.5)
+printslow("\nSalam aleykum, janob " + familyname + " 🤗🌹")
 
-schoolname = input(f"Maktabizni nomini aytvoring janob {familyname} --  ")
-printslow(f"Siz {familyname}, {schoolname} maktabida o‘qivotkaningizni bilib oldim🤗🌹")
 
-time.sleep(0.3)
-print("\n" * 3)
-time.sleep(0.1)
-if os.name == 'nt':
-    os.system('cls')
-#VAzifa 3: Calculate АНИК Ёши
+cooldown()
 
-birthdate = input("Qachon tug'ilding janob JIGULI🚗🚘🏎️ (DD.MM.YYYY): ")
+#VAzifa 2: State the users school name 
+printslow("Maktabizni nomini aytvoring janob " + familyname + " --  ")
+schoolname = input("")
+printslow(f"\nSiz {familyname}, {schoolname}da o‘qivotkaningizni bilib oldim🤗🌹")
+
+cooldown()
+
+#VAzifa 3: Calculate АНИК Ёши 
+printslow("Qachon tug'ilding janob JIGULI🚗🚘🏎️ (DD.MM.YYYY): ")
+birthdate = input("")
 birthdate = birthdate.split(".")
 birthday = int(birthdate[0])
 birthmonth = int(birthdate[1])
@@ -43,6 +56,7 @@ currentyear = time.localtime().tm_year
 currentday = time.localtime().tm_mday
 currentmonth = time.localtime().tm_mon
 year = currentyear - birthyear
+
 month = currentmonth - birthmonth
 if month < 0:
     year -= 1
@@ -59,29 +73,47 @@ if day < 0:
         day += 30
     else:
         day += 28
+if year < 0:
+    printslow("Bor, roddomga qayt, sen hali tug‘ilmading🌹😢")
+    time.sleep(2)
+    sys.exit()
+elif year <= 2:
+    printslow("ishonmadim karoch, o'tib ketamiz")
+    time.sleep(2)
+elif year <= 4:
+    printslow("Yoo bratishka, komputer oldida o'tirib nima qilasan, bor uyga🌹😭")
+    time.sleep(2)
+    sys.exit()
+elif year < 7:
+    printslow("Bor, bog'chadan chaqirishyapti seni🌹😭")
+    time.sleep(2)
+    sys.exit()
 
-    
 finalage = f"{year} yil, {month} oy, {day} kun"
 printslow(f"Siz {finalage} yashagansiz, janob {familyname}🤗🌹")
 
-time.sleep(0.3)
-print("\n" * 3)
-time.sleep(0.1)
+cooldown()
 
 #VAzifa 4: calcutlate CУММА of three numbers
-num1 = int(input("Birinchi son ayting🤗: "))
-num2 = int(input("Ikkinchi son ayting🤗: "))  
-num3 = int(input("Uchinchi son ayting🤗: "))
+printslow("Birinchi sonni ayting🤗: ")
+num1 = int(input(""))
+printslow("Ikkinchi sonni ayting🤗: ")
+num2 = int(input("")) 
+printslow("Uchinchi sonni ayting🤗: ")
+num3 = int(input(""))
 sum = num1 + num2 + num3
 printslow(f"shu uchta sonning yigindisi🌹: {sum}")
+time.sleep(0.5)
 
-time.sleep(0.3)
-print("\n" * 3)
-time.sleep(0.1)
+cooldown()
 
 #VAzifa 5: Calculate the perimeter of a rectangle
-length = int(input("tortburchakni uzunligini kiriting😉 --  "))
-width = int(input("tortburchakni kengligini kiriting😂😂😂😂 --  "))
-perimeter = 2 * (length + width)
-stage1mock = f"ehhh, siz {schoolname}da o'qib turib, shu to'rtburchakning perimetri {perimeter} ekanligini bilmaysiz, janob {familyname}. 😢🌹"
+printslow("tortburchakni uzunligini kiriting😉 --  ")
+length = float(input(""))
+printslow("tortburchakni kengligini kiriting😂😂😂😂 --  ")
+width = float(input(""))
+perimeter = float(2 * (length + width))
+stage1mock = f"ehhh, siz uzizni {year} yoshingizda, {schoolname}da o'qib turib,\nshu to'rtburchakning perimetri {perimeter} ekanligini bilmaysiz, janob {familyname}. 😢🌹"
 printslow(stage1mock)
+time.sleep(1)
+cooldown()
